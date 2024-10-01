@@ -1,0 +1,9 @@
+<h1>Main#index</h1>
+<p>Hello Lynn</p>
+
+<%= link_to('Go to tasks', {controller: 'tasks', action: 'index'}) %><br />
+<%= link_to('Go to About', {action: 'about', id: 20, page: 5}) %><br />
+
+<%= link_to('Categories', categories_path) %><br />
+<%= link_to('Tasks', tasks_path(page: 1)) %><br />
+
