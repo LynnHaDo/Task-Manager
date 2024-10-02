@@ -1,5 +1,10 @@
 class User < ApplicationRecord
+    validates :first_name, presence: true,
+                            length: {minimum: 1}
+
     scope :sorted, -> { order(:last_name, :first_name) }
+
+    has_many :task_assignments
     
     def full_name
         [first_name, last_name].join(' ')

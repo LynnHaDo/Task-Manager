@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_30_234000) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_02_035617) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "task_assignments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "user_id", null: false
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id", "user_id"], name: "index_task_assignments_on_task_id_and_user_id"
+    t.index ["task_id"], name: "index_task_assignments_on_task_id"
+    t.index ["user_id", "task_id"], name: "index_task_assignments_on_user_id_and_task_id"
+    t.index ["user_id"], name: "index_task_assignments_on_user_id"
   end
 
   create_table "tasks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -35,4 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_30_234000) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "task_assignments", "tasks"
+  add_foreign_key "task_assignments", "users"
 end
